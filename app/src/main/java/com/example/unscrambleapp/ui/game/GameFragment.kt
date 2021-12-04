@@ -1,20 +1,23 @@
 package com.example.unscrambleapp.ui.game
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
 import com.example.unscrambleapp.R
 import com.example.unscrambleapp.databinding.FragmentGameBinding
+import kotlin.properties.ReadOnlyProperty
 
 
 class GameFragment : Fragment() {
 
+    private val viewModel: GameViewModel by viewModels()
 
-    private var score = 0
-    private var currentWordCount = 0
-    private var currentScrambledWord = "test"
+
     private lateinit var binding: FragmentGameBinding
 
     override fun onCreateView(
@@ -23,8 +26,16 @@ class GameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGameBinding.inflate(inflater, container, false)
+        Log.d("GameFragment", "GameFragment created/re-created!")
         return binding.root
     }
+
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.d("GameFragment", "GameFragment destroyed!")
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,25 +50,25 @@ class GameFragment : Fragment() {
     }
 
     private fun updateNextWordOnScreen() {
-        binding.textViewUnscrambledWord.text = currentScrambledWord
+        binding.textViewUnscrambledWord.text = viewModel.currentScrambledWord
     }
 
     private fun onSkipWord() {
-        currentScrambledWord = getNextScrambledWord()
-        currentWordCount++
-        binding.wordCount.text = getString(R.string.word_count, currentWordCount, MAX_NO_OF_WORDS)
-        setErrorTextField(false)
-        updateNextWordOnScreen()
+//        currentScrambledWord = getNextScrambledWord()
+//        currentWordCount++
+//        binding.wordCount.text = getString(R.string.word_count, currentWordCount, MAX_NO_OF_WORDS)
+//        setErrorTextField(false)
+//        updateNextWordOnScreen()
     }
 
     private fun onSubmitWord() {
-        currentScrambledWord = getNextScrambledWord()
-        currentWordCount++
-        score += SCORE_INCREASE
-        binding.wordCount.text = getString(R.string.word_count, currentWordCount, MAX_NO_OF_WORDS)
-        binding.score.text = getString(R.string.score, score)
-        setErrorTextField(false)
-        updateNextWordOnScreen()
+//        currentScrambledWord = getNextScrambledWord()
+//        currentWordCount++
+//        score += SCORE_INCREASE
+//        binding.wordCount.text = getString(R.string.word_count, currentWordCount, MAX_NO_OF_WORDS)
+//        binding.score.text = getString(R.string.score, score)
+//        setErrorTextField(false)
+//        updateNextWordOnScreen()
     }
 
     private fun setErrorTextField(error: Boolean) {
