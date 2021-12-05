@@ -27,7 +27,6 @@ class GameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGameBinding.inflate(inflater, container, false)
-        Log.d("GameFragment", "GameFragment created/re-created!")
         return binding.root
     }
 

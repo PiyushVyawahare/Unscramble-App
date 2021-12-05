@@ -64,7 +64,6 @@ class GameViewModel: ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
-        Log.d("GameFragment", "GameViewModel Destroyed")
     }
 
     fun reinitializeData() {
