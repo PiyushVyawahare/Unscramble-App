@@ -5,17 +5,12 @@ import androidx.lifecycle.ViewModel
 
 class GameViewModel: ViewModel() {
 
-    init {
-        Log.d("GameFragment", "GameViewModel created!")
-        getNextWord()
-    }
-
     private var _score = 0
     val score: Int
         get() = _score
 
     private var _currentWordCount = 0
-    private val currentWordCount: Int
+    val currentWordCount: Int
         get() = _currentWordCount
 
     private lateinit var _currentScrambledWord: String
@@ -24,6 +19,12 @@ class GameViewModel: ViewModel() {
 
     private var wordList: MutableList<String> = mutableListOf()
     private lateinit var currentWord: String
+
+    init {
+        Log.d("GameFragment", "GameViewModel created!")
+        getNextWord()
+    }
+
 
     private fun getNextWord(){
         currentWord = allWordsList.random()
