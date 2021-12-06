@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
@@ -26,7 +27,7 @@ class GameFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentGameBinding.inflate(inflater, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_game, container, false)
         return binding.root
     }
 
@@ -34,23 +35,13 @@ class GameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.gameViewModel = viewModel
+        binding.maxNoOfWords = MAX_NO_OF_WORDS
+
+        binding.lifecycleOwner = viewLifecycleOwner
+
         binding.submit.setOnClickListener { onSubmitWord() }
         binding.skip.setOnClickListener { onSkipWord() }
-
-        viewModel.currentScrambledWord.observe(viewLifecycleOwner,
-            {newWord ->
-                binding.textViewUnscrambledWord.text = newWord
-            })
-
-        viewModel.score.observe(viewLifecycleOwner,
-            {newScore ->
-                binding.score.text = getString(R.string.score, newScore)
-            })
-
-        viewModel.currentWordCount.observe(viewLifecycleOwner,
-            {newWordCount ->
-                binding.wordCount.text = getString(R.string.word_count, newWordCount, MAX_NO_OF_WORDS)
-            })
     }
 
 //    private fun updateNextWordOnScreen() {
