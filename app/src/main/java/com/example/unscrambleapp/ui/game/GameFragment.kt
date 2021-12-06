@@ -1,19 +1,15 @@
 package com.example.unscrambleapp.ui.game
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import com.example.unscrambleapp.R
 import com.example.unscrambleapp.databinding.FragmentGameBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlin.properties.ReadOnlyProperty
-
 
 class GameFragment : Fragment() {
 
@@ -44,9 +40,6 @@ class GameFragment : Fragment() {
         binding.skip.setOnClickListener { onSkipWord() }
     }
 
-//    private fun updateNextWordOnScreen() {
-//        binding.textViewUnscrambledWord.text = viewModel.currentScrambledWord
-//    }
 
     private fun onSkipWord() {
         if (viewModel.nextWord()) {
@@ -81,12 +74,6 @@ class GameFragment : Fragment() {
         }
     }
 
-    private fun getNextScrambledWord(): String {
-        val tempWord = allWordsList.random().toCharArray()
-        tempWord.shuffle()
-        return String(tempWord)
-
-    }
 
     private fun restartGame() {
         viewModel.reinitializeData()

@@ -65,10 +65,6 @@ class GameViewModel: ViewModel() {
         _score.value = (score.value)?.plus(SCORE_INCREASE)
     }
 
-    override fun onCleared() {
-        super.onCleared()
-    }
-
     fun reinitializeData() {
         _score.value = 0
         _currentWordCount.value = 0
